@@ -13,8 +13,10 @@ using namespace std;
 int euclidianGCD(int, int, int*, int*);
 
 //Driver function
-int main(int m, int n){
-    //Coefficients for a and b respectively such that ax+by = gcd(a, b)
+int main(int argc, char* argv[]){
+    int m = stoi(argv[1]);
+    int n = stoi(argv[2]);
+    //Coefficients for m and n respectively such that mx+ny = gcd(m, n)
     int x, y;
 
     //Calculating the gcd and passing x and y back through the functions
@@ -41,7 +43,7 @@ int euclidianGCD(int a, int b, int *c, int *d){
     //Variables to store the values from the recursive call.
     int cR, dR;
     //Recursive call
-    int gcd = euclidianGCD(a, b, &cR, &dR);
+    int gcd = euclidianGCD(b%a, a, &cR, &dR);
 
     //Updating after recursive call
     *c = dR - ((b/a)*cR);
