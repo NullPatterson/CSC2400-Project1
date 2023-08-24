@@ -38,6 +38,7 @@ class primeFactor{
     public:
         primeFactor *nextNode;
         primeFactor(int);
+        primeFactor(int, int);
         ~primeFactor();
         int getFactor();
         int getFactorPower();
@@ -51,9 +52,25 @@ class primeFactor{
 int gcdMiddleSchool(int a, int b){
     primeFactor *primeListAHead = NULL;
     primeFactor *primeListBHead = NULL;
+    primeFactor *commonFactors = NULL;
+    int gcd;
 
     primeListAHead = primeFactorizations(a, primeListAHead);
     primeListBHead = primeFactorizations(b, primeListBHead);
+
+    commonFactors = likeFactors(primeListAHead, primeListBHead);
+
+    if(commonFactors == NULL){
+        gcd = 0;
+    }
+    else{gcd = 1;}
+
+    while(commonFactors != NULL){
+        gcd = gcd*(commonFactors->getFactor()*commonFactors->getFactorPower());
+        commonFactors = commonFactors->nextNode;
+    }
+
+    return gcd;
 }
 
 primeFactor *primeFactorizations(int x, primeFactor *primeFactorX){
@@ -108,7 +125,23 @@ primeFactor *likeFactors(primeFactor *primeList1, primeFactor *primeList2){
     primeFactor *commonFactorListHead = NULL;
     primeFactor *curCommonFactor = commonFactorListHead;
     
-    
+    while((primeList1 != NULL) && (primeList2 != NULL)){
+        if(primeList1->getFactor() < primeList2->getFactor()){
+            primeList1 = primeList1->nextNode;
+        }
+        else if(primeList1->getFactor() > primeList2->getFactor()){
+            primeList2 = primeList2->nextNode;
+        }
+        else{
+            if(primeList1->getFactorPower() < primeList2->getFactorPower()){
+                curCommonFactor = new primeFactor(primeList1->getFactor(), primeList1->getFactorPower());
+            }
+            else{
+                curCommonFactor = new primeFactor(primeList2->getFactor(), primeList2->getFactorPower());
+            }
+            curCommonFactor = curCommonFactor->nextNode;
+        }
+    }
 
     return commonFactorListHead;
 }
@@ -121,6 +154,12 @@ primeFactor *likeFactors(primeFactor *primeList1, primeFactor *primeList2){
 primeFactor::primeFactor(int givenFactor){
     factor = givenFactor;
     factorPower = 1;
+    nextNode = NULL;
+}
+
+primeFactor::primeFactor(int givenFactor, int givenPower){
+    factor = givenFactor;
+    factorPower = givenPower;
     nextNode = NULL;
 }
 
