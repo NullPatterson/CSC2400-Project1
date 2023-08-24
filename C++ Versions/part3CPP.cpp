@@ -45,6 +45,7 @@ class primeFactor{
 //Function Definitions
 void primeFactorizations(int x, primeFactor *primeFactorX){
     if((x == 2) || (x == 1)){
+        primeFactorX = new primeFactor;
         
     }
     else{
