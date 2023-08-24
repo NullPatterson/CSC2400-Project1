@@ -10,36 +10,52 @@
 #include <vector>
 using namespace std;
 
-//Function Prototypes
-void primeFactorization(int, vector<int>&);
+//Class Prototypes
+class node;
 
-//Classes
-//Node will be used to form a linked list of the prime factorization of a number
-//val will be used to store a prime number that is a factor of a given value, and 
-//  how many times that value can be factored by the given val is represented by valPower
-class node{
-    int val;
-    int valPower;
-};
+//Function Prototypes
+void primeFactorization(int, primeFactor*);
+
+
 
 //Driver Function
 int main(int argc, char* argv[]){
     //Variables used to calculate the GCD
     int m = stoi(argv[1]);
     int n = stoi(argv[2]);
-    //Vectors to store the prime factorizations of m and n respectively
-    vector<int> vectorm;
-    vector<int> vectorn;
+    primeFactor *primeListMHead;
+    primeFactor *primeListNHead;
 }
 
+//Class Definitions
+/*
+    Class Name: primeFactor
+    Purpose:    Node for a linked list where the prime factor of a given value is stored and then how many times 
+                that said value can be factored by the given prime factor.
+*/
+class primeFactor{
+    public:
+        int factor; 
+        int factorPower;
+        primeFactor *nextNode;
+    private:
+        primeFactor();
+};
+
 //Function Definitions
-void primeFactorizations(int x, vector<int> &vectorx){
+void primeFactorizations(int x, primeFactor *primeFactorX){
     if((x == 2) || (x == 1)){
-        vectorx.push_back(x);
+        
     }
     else{
         while(x%2 == 0){
             
         }
     }
+}
+
+primeFactor::primeFactor(){
+    factor = 0;
+    factorPower = 0;
+    nextNode = NULL;
 }
