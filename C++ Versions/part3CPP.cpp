@@ -8,6 +8,7 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
+#include <math>
 using namespace std;
 
 //Class Prototypes
@@ -23,8 +24,8 @@ int main(int argc, char* argv[]){
     //Variables used to calculate the GCD
     int m = stoi(argv[1]);
     int n = stoi(argv[2]);
-    primeFactor *primeListMHead;
-    primeFactor *primeListNHead;
+    primeFactor *primeListMHead = NULL;
+    primeFactor *primeListNHead = NULL;
 }
 
 //Class Definitions
@@ -50,20 +51,37 @@ class primeFactor{
 primeFactor *primeFactorizations(int x, primeFactor *primeFactorX){
     //Pointer to allocate and track nodes
     primeFactor *curNode = primeFactorX;
+    //Impossible Case
+    if(x < 2){
+        cout << endl << "UNDEFINED: By definition a prime number is an integer greater than or equal to 2." << endl;
+        cout << "Your input: " << x << "does not meet this criteria please try again." << endl << endl;
+    }
+    //Base Case
     if(x == 2){
         curNode = new primeFactor(x);
-        
-        return curNode;
+        //curNode->incrementPower();
+        return primeFactorX;
     }
     else{
-        if(x%2 == 0){
-            
-        }
+        //Seeing how many time 2 factors into given value
         while(x%2 == 0){
-            
+            //Allocating the head of the linked list if one does not exist
+            if(curNode == NULL){
+                curNode = new primeFactor(2);
+            }
+            //Increasing the count for the number of times 2 factors into x
+            else{
+                curNode->incrementPower();
+            }
+            x = x/2;
+        }
+        for(int i = 3; i <= sqrt(x); i = i +2){
+            while(x%i == 0){
+                if(curNode == NULL)
+            }
         }
     }
-    return NULL;
+    return primeFactorX;
 }
 
 //primeFactor Function Definitions
@@ -73,7 +91,7 @@ primeFactor *primeFactorizations(int x, primeFactor *primeFactorX){
 */
 primeFactor::primeFactor(int givenFactor){
     factor = givenFactor;
-    factorPower = 0;
+    factorPower = 1;
     nextNode = NULL;
 }
 
