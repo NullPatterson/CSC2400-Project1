@@ -16,7 +16,7 @@ class primeFactor;
 
 //Function Prototypes
 int gcdMiddleSchool(int, int); 
-primeFactor *primeFactorization(int, primeFactor*);
+primeFactor *primeFactorizations(int, primeFactor*);
 primeFactor *likeFactors(primeFactor*, primeFactor*);
 
 
@@ -42,7 +42,7 @@ class primeFactor{
         ~primeFactor();
         int getFactor();
         int getFactorPower();
-        int incrementPower();
+        void incrementPower();
     private:
         int factor; 
         int factorPower;      
@@ -57,6 +57,8 @@ int gcdMiddleSchool(int a, int b){
 
     primeListAHead = primeFactorizations(a, primeListAHead);
     primeListBHead = primeFactorizations(b, primeListBHead);
+    //primeFactorizations(a, primeListAHead);
+    //primeFactorizations(a, primeListBHead);
 
     commonFactors = likeFactors(primeListAHead, primeListBHead);
 
@@ -181,6 +183,6 @@ int primeFactor::getFactorPower(){
     return factorPower;
 }
 
-int primeFactor::incrementPower(){
+void primeFactor::incrementPower(){
     ++factorPower;
 }
