@@ -8,14 +8,16 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
-#include <math>
+#include <cmath>
 using namespace std;
 
 //Class Prototypes
 class primeFactor;
 
 //Function Prototypes
- primeFactor *primeFactorization(int, primeFactor*);
+int gcdMiddleSchool(int, int); 
+primeFactor *primeFactorization(int, primeFactor*);
+primeFactor *likeFactors(primeFactor*, primeFactor*);
 
 
 
@@ -24,8 +26,6 @@ int main(int argc, char* argv[]){
     //Variables used to calculate the GCD
     int m = stoi(argv[1]);
     int n = stoi(argv[2]);
-    primeFactor *primeListMHead = NULL;
-    primeFactor *primeListNHead = NULL;
 }
 
 //Class Definitions
@@ -36,6 +36,7 @@ int main(int argc, char* argv[]){
 */
 class primeFactor{
     public:
+        primeFactor *nextNode;
         primeFactor(int);
         ~primeFactor();
         int getFactor();
@@ -43,11 +44,18 @@ class primeFactor{
         int incrementPower();
     private:
         int factor; 
-        int factorPower;
-        primeFactor *nextNode;
+        int factorPower;      
 };
 
 //Function Definitions
+int gcdMiddleSchool(int a, int b){
+    primeFactor *primeListAHead = NULL;
+    primeFactor *primeListBHead = NULL;
+
+    primeListAHead = primeFactorizations(a, primeListAHead);
+    primeListBHead = primeFactorizations(b, primeListBHead);
+}
+
 primeFactor *primeFactorizations(int x, primeFactor *primeFactorX){
     //Pointer to allocate and track nodes
     primeFactor *curNode = primeFactorX;
@@ -76,12 +84,33 @@ primeFactor *primeFactorizations(int x, primeFactor *primeFactorX){
             x = x/2;
         }
         for(int i = 3; i <= sqrt(x); i = i +2){
+            //Ensuring the next node used will be empty(NULL) if its not already
+            if(curNode != NULL){
+                curNode = curNode->nextNode;
+            }
+            //Checking to see if the current value is divisible by i. 
             while(x%i == 0){
-                if(curNode == NULL)
+                if(curNode == NULL){
+                    curNode = new primeFactor(i);
+                }
+                else{
+                    curNode->incrementPower();
+                }
+                x = x/i;
             }
         }
     }
     return primeFactorX;
+}
+
+primeFactor *likeFactors(primeFactor *primeList1, primeFactor *primeList2){
+    //Declaring a pointer for a linked list to track like factors
+    primeFactor *commonFactorListHead = NULL;
+    primeFactor *curCommonFactor = commonFactorListHead;
+    
+    
+
+    return commonFactorListHead;
 }
 
 //primeFactor Function Definitions
