@@ -10,7 +10,7 @@
 using namespace std;
 
 //Function Prototypes
-int consecutiveGCD(int, int, int*);
+int consecutiveGCD(int, int, int);
 
 //Driver Function
 int main(int argc, char* argv[]){
@@ -20,6 +20,7 @@ int main(int argc, char* argv[]){
 
     int gcd = consecutiveGCD(m, n, min(m, n));
 
+    cout << "gcd(" << m << ", " << n << ") = " << gcd << endl;
     return 0;
 }
 
