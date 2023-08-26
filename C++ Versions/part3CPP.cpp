@@ -18,6 +18,7 @@ class primeFactor;
 int gcdMiddleSchool(int, int); 
 primeFactor *primeFactorizations(int, primeFactor*);
 primeFactor *likeFactors(primeFactor*, primeFactor*);
+void nodeModificationCheck(primeFactor*);
 
 
 
@@ -26,6 +27,19 @@ int main(int argc, char* argv[]){
     //Variables used to calculate the GCD
     int m = stoi(argv[1]);
     int n = stoi(argv[2]);
+
+    cout << "m: " << m << endl;
+    cout << "n: " << n << endl;
+
+    int GCD = gcdMiddleSchool(m, n);
+
+    if(GCD == 0){
+        cout << "GCD for the values given is undefined." << endl;
+        cout << "Please ensure you have entered positive integers greater than or equal to 2." << endl;
+    }
+    else{
+        cout << "gcd(" << m << ", " << n << ") = " << GCD << endl; 
+    }
 }
 
 //Class Definitions
@@ -53,7 +67,7 @@ int gcdMiddleSchool(int a, int b){
     primeFactor *primeListAHead = NULL;
     primeFactor *primeListBHead = NULL;
     primeFactor *commonFactors = NULL;
-    int gcd;
+    int gcd = 1;
 
     primeListAHead = primeFactorizations(a, primeListAHead);
     primeListBHead = primeFactorizations(b, primeListBHead);
@@ -63,9 +77,8 @@ int gcdMiddleSchool(int a, int b){
     commonFactors = likeFactors(primeListAHead, primeListBHead);
 
     if(commonFactors == NULL){
-        gcd = 0;
+        return 0;
     }
-    else{gcd = 1;}
 
     while(commonFactors != NULL){
         gcd = gcd*(commonFactors->getFactor()*commonFactors->getFactorPower());
@@ -84,15 +97,15 @@ primeFactor *primeFactorizations(int x, primeFactor *primeFactorX){
         cout << "Your input: " << x << "does not meet this criteria please try again." << endl << endl;
     }
     //Base Case
-    if(x == 2){
+    else if(x == 2){
         curNode = new primeFactor(x);
         //curNode->incrementPower();
         return primeFactorX;
     }
     else{
         //Seeing how many time 2 factors into given value
-        while(x%2 == 0){
-            //Allocating the head of the linked list if one does not exist
+        while(x % 2 == 0){
+            //Allocating the latested node of the linked list
             if(curNode == NULL){
                 curNode = new primeFactor(2);
             }
