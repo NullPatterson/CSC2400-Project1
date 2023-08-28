@@ -76,12 +76,8 @@ int gcdMiddleSchool(int a, int b){
 
     commonFactors = likeFactors(primeListAHead, primeListBHead);
 
-    if(commonFactors == NULL){
-        return 0;
-    }
-
     while(commonFactors != NULL){
-        gcd = gcd*(commonFactors->getFactor()*commonFactors->getFactorPower());
+        gcd = gcd * (commonFactors->getFactor() * commonFactors->getFactorPower());
         commonFactors = commonFactors->nextNode;
     }
 
