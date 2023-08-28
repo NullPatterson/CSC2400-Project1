@@ -12,8 +12,8 @@
 using namespace std;
 
 //Function Prototypes
-void commonFactors();
-int gcdCalculation();
+void commonFactors(vector<int> &, vector<int> &, vector<int> &);
+int gcdCalculation(int, int, vector<int> &, vector<int> &);
 void primeFactorization(int, vector<int> &);
 
 
@@ -21,10 +21,11 @@ void primeFactorization(int, vector<int> &);
 int main(int argc, char* argv[]){
     int m = stoi(argv[1]);
     int n = stoi(argv[2]);
+    int GCD;
     vector<int> primesM;
     vector<int> primesN;
 
-    
+    GCD = gcdCalculation(m, n, primesM, primesN);
 
     return 0;
 }
@@ -34,8 +35,50 @@ int main(int argc, char* argv[]){
     Function Name: commonFactors()
     Purpose: Determine all common factors from two sets of data
 */
-void commonFactors(){
+void commonFactors(vector<int> &vectorX, vector<int> &vectorY, vector<int> &vectorC){
+    vector<int> *smallerVec, *largerVec;
+    int curLElem = 0;
+
+    if(vectorX.size() < vectorY.size()){
+        smallerVec = &vectorX;
+        largerVec = &vectorY;
+    }
+    else{
+        smallerVec = &vectorY;
+        largerVec = &vectorX;
+    }
     
+    for(int i = 0; i < (*smallerVec).size(); ++i){
+        while((*smallerVec)[i] > (*largerVec)[curLElem]){
+            ++curLElem;
+        }
+
+        if((*smallerVec)[i] == (*largerVec)[curLElem]){
+            vectorC.push_back((*smallerVec)[i]);
+            ++curLElem;
+        }
+    }
+
+}
+
+/*
+    Function Name: gcdCalculation()
+    Purpose: Determine the gcd of two integers by finding the product of all of their common
+             prime factors
+*/
+int gcdCalculation(int a, int b, vector<int> &vectorA, vector<int> &vectorB){
+    vector<int> commonVector;
+    int gcd = 1;
+
+    primeFactorization(a, vectorA);
+    primeFactorization(b, vectorB);
+
+    commonFactors(vectorA, vectorB, commonVector);
+
+    for(int i = 0; i < commonVector.size(); ++i){
+        gcd = gcd * commonVector[i];
+    }
+    return gcd;
 }
 
 /*
