@@ -12,7 +12,10 @@
 using namespace std;
 
 //Function Prototypes
+void commonFactors();
+int gcdCalculation();
 void primeFactorization(int, vector<int> &);
+
 
 //Driver Function
 int main(int argc, char* argv[]){
@@ -27,6 +30,14 @@ int main(int argc, char* argv[]){
 }
 
 //Function Definitions
+/*
+    Function Name: commonFactors()
+    Purpose: Determine all common factors from two sets of data
+*/
+void commonFactors(){
+    
+}
+
 /*
     Function Name: primeFactorization()
     Purpose: Factor a given integer into its prime factors, and store the factors in a vector passed by reference
@@ -53,3 +64,4 @@ void primeFactorization(int x, vector<int> &vectorX){
         }
     }
 }
+
