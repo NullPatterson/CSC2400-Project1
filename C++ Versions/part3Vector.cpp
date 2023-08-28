@@ -32,5 +32,24 @@ int main(int argc, char* argv[]){
     Purpose: Factor a given integer into its prime factors, and store the factors in a vector passed by reference
 */
 void primeFactorization(int x, vector<int> &vectorX){
-    
+    //Base Case
+    if(x == 2){
+        vectorX.push_back(2);
+    }
+    //Impossible Case
+    else if(x < 2){
+        vectorX.push_back(0);
+    }
+    else{
+        while(x%2 == 0){
+            vectorX.push_back(2);
+            x = x/2;
+        }
+        for(int i = 3; i < ceil(sqrt(x)); i += 2){
+            while(x%i == 0){
+                vectorX.push_back(i);
+                x = x/i;
+            }
+        }
+    }
 }
