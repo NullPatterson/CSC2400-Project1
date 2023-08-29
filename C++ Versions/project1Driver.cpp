@@ -40,7 +40,18 @@ void part1(int a, int b){
     cout << endl << "PART 1:" << endl;
 
     //Calculating the gcd and passing x and y by reference
-    int gcd = euclidianGCD(a, b, &x, &y);
+    int gcd;
+    //gcd = euclidianGCD(a, b, &x, &y);
+    if((a < 0) && (b > 0)){
+        gcd = euclidianGCD(-a, b, &x, &y);
+    }
+    else if((a > 0) && (b < 0)){
+        gcd = euclidianGCD(a, -b, &x, &y);
+    }
+    else{
+        gcd = euclidianGCD(a, b, &x, &y);
+    }
+
 
     //Outputting the following 3 lines all on one line. Seperated here for readibility while editing
     //Output should look like "gcd(a, b) = (a)(x) + (b)(y) = gcd"
