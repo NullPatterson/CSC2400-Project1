@@ -3,9 +3,9 @@
     Date: 8/29/2023
     File Name: project1.cpp
     Purpose: Execute 3 different Algorithms to calculate the gcd of two given numbers taken from the command line
-             Euclid Algorithm
-             Consecutive Integer Checking Algorithm
-             "Middle School Algorithm"
+             Part 1: Euclid Algorithm
+             Part 2: Consecutive Integer Checking Algorithm
+             Part 3: "Middle School Algorithm"
 */
 //Libaries and Header Files
 #include <cmath>
@@ -73,4 +73,143 @@ int euclidianGCD(int a, int b, int *x, int *y){
     *y = xRecur;
 
     return gcd;
+}
+
+
+
+//PART 2
+/*
+    Function Name: part2()
+    Purpose: Contain all calculations and function calls related to part 2
+*/
+void part2(int a, int b){
+    cout << endl << endl << "PART 2:" << endl;
+
+    //GCD Calculation
+    int gcd = consecutiveGCD(a, b, min(a, b));
+
+    //Outputting GCD
+    cout << "gcd(" << a << ", " << b << ") = " << gcd << endl;
+}
+
+/*
+    Function Name: consecutiveGCD()
+    Purpose: Recursively call itself to compare a mod t and b mod t until both = 0
+    Paramaters: a one of two variables being compared to find the GCD
+                b one of two variables being compared to find the GCD
+                t a variable that was assigned min(a, b) and will be decremented once per call of the function until the GCD is found
+*/
+int consecutiveGCD(int a, int b, int t){
+    //Using mod(%) to determine if t is a divisor of a value
+    if((a%t == 0) && (b%t == 0)){
+        return t;
+    }
+    else{
+        t = consecutiveGCD(a, b, t-1);
+    }
+    return t;
+}
+
+//PART 3
+/*
+    Function Name: part3()
+    Purpose: Contain all calculations and function calls related to part 3
+*/
+void part3(int a, int b){
+    cout << endl << endl << "PART 3:" << endl;
+
+    //Vectors used to store the prime factors of a and b respectively
+    vector<int> primesA;
+    vector<int> primesB;
+
+    //GCD Calculation
+    int gcd = middleSchoolGCD(a, b, primesA, primesB);
+
+    //Outputting the GCD
+    cout << "gcd(" << a << ", " << b << ") = " << gcd << endl;
+}
+
+/*
+    Function Name: commonFactors()
+    Purpose: Determine all common factors from two sets of data
+*/
+void commonFactors(vector<int> &vectorA, vector<int> &vectorB, vector<int> &vectorC){
+    //Vector pointers to track which vector out of vectorA and vectorB, is smaller
+    vector<int> *smallerVec, *largerVec;
+    //Integer used to calculate the latest checked element int the larger vector
+    int curLElem = 0;
+
+    //Assigning pointers
+    if(vectorA.size() < vectorB.size()){
+        smallerVec = &vectorA;
+        largerVec = &vectorB;
+    }
+    else{
+        smallerVec = &vectorA;
+        largerVec = &vectorB;
+    }
+    
+    //Iterating through vectorX and vectorY and comparing vector elements
+    for(int i = 0; i < (*smallerVec).size(); ++i){
+        while((*smallerVec)[i] > (*largerVec)[curLElem]){
+            ++curLElem;
+        }
+
+        if((*smallerVec)[i] == (*largerVec)[curLElem]){
+            vectorC.push_back((*smallerVec)[i]);
+            ++curLElem;
+        }
+    }
+}
+
+/*
+    Function Name: middleSchoolGCD()
+    Purpose: Determine the gcd of two integers by finding the product of all of their common
+             prime factors
+*/
+int middleSchoolGCD(int a, int b, vector<int> &vectorA, vector<int> &vectorB){
+    //Vector used to store all common prime factors of a and b
+    vector<int> commonVector;
+    int gcd = 1;
+
+    //Determining the prime factors of a and b and storing them in their respective vectors
+    primeFactorization(a, vectorA);
+    primeFactorization(b, vectorB);
+
+    //Calcualting common prime factors of a and b
+    commonFactors(vectorA, vectorB, commonVector);
+
+    //Calculating the gcd
+    for(int i = 0; i < commonVector.size(); ++i){
+        gcd = gcd * commonVector[i];
+    }
+
+    return gcd;
+}
+
+/*
+    Function Name: primeFactorization()
+    Purpose: Factor a given integer into its prime factors, and store the factors in a vector passed by reference
+*/
+void primeFactorization(int z, vector<int> &vectorZ){
+    //Base Case
+    if(z == 2){
+        vectorZ.push_back(2);
+    }
+    //Impossible Case
+    else if(z < 2){
+        vectorZ.push_back(0);
+    }
+    else{
+        while(z%2 == 0){
+            vectorZ.push_back(2);
+            z = z/2;
+        }
+        for(int i = 3; i < ceil(sqrt(z)); i += 2){
+            while(z%i == 0){
+                vectorZ.push_back(i);
+                z = z/i;
+            }
+        }
+    }
 }
