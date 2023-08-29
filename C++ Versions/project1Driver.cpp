@@ -112,7 +112,12 @@ void part2(int a, int b){
     }
 
     //Outputting GCD
-    cout << "gcd(" << a << ", " << b << ") = " << gcd << endl;
+    if((a < 0) && (b < 0)){
+        cout << "gcd(" << a << ", " << b << ") = -" << gcd << endl;
+    }
+    else{
+        cout << "gcd(" << a << ", " << b << ") = " << gcd << endl;
+    }
 }
 
 /*
