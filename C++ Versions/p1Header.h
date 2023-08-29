@@ -6,13 +6,25 @@
 */
 #ifndef P1HEADER_H
 #define P1HEADER_H
-
-//Libraries
+#include <vector>
 #include <cmath>
 #include <iomanip>
 #include <iostream>
-#include <vector>
+using namespace std;
 
-//Function Prototypes
+//FUNCTION PROTOTYPES
+//Part 1
+void part1(int, int);
+int euclidianGCD(int, int, int &, int &);
+
+//Part2
+void part2(int, int);
+int consecutiveGCD(int, int, int);
+
+//Part 3
+void part3(int, int);
+void commonFactors(vector<int> &, vector<int> &, vector<int> &);
+int middleSchoolGCD(int, int, vector<int> &, vector<int> &);
+void primeFactorization(int, vector<int> &);
 
 #endif
