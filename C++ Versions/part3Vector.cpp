@@ -27,6 +27,8 @@ int main(int argc, char* argv[]){
 
     GCD = gcdCalculation(m, n, primesM, primesN);
 
+    cout << "gcd(" << m << ", " << n << ") = " << GCD << endl;
+
     return 0;
 }
 
