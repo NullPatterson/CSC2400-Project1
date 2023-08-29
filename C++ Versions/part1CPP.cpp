@@ -1,6 +1,6 @@
 /*
     Name: Nol Patterson
-    Date: 8/24/2023
+    Date: 8/29/2023
     File Name: extendedEuclidCPP
     Purpose: Write a program to execute the extended Euclid's Algorithm (ax+by=gcd(a,b))
 */

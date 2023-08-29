@@ -84,9 +84,21 @@ int euclidianGCD(int a, int b, int *x, int *y){
 */
 void part2(int a, int b){
     cout << endl << endl << "PART 2:" << endl;
-
+    
     //GCD Calculation
-    int gcd = consecutiveGCD(a, b, min(a, b));
+    int gcd;
+    if((a < 0) && (b < 0)){
+        gcd = consecutiveGCD(-a, -b, min(-a, -b));
+    }
+    else if(a < 0){
+        gcd = consecutiveGCD(-a, b, min(-a, b));
+    }
+    else if(b < 0){
+        gcd = consecutiveGCD(a, -b, min(a, -b));
+    }
+    else{
+        gcd = consecutiveGCD(a, b, min(a, b));
+    }
 
     //Outputting GCD
     cout << "gcd(" << a << ", " << b << ") = " << gcd << endl;
@@ -123,7 +135,8 @@ void part3(int a, int b){
     vector<int> primesB;
 
     //GCD Calculation
-    int gcd = middleSchoolGCD(a, b, primesA, primesB);
+    int gcd;
+    gcd = middleSchoolGCD(a, b, primesA, primesB);
 
     //Outputting the GCD
     cout << "gcd(" << a << ", " << b << ") = " << gcd << endl;
