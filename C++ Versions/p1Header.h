@@ -15,7 +15,7 @@ using namespace std;
 //FUNCTION PROTOTYPES
 //Part 1
 void part1(int, int);
-int euclidianGCD(int, int, int &, int &);
+int euclidianGCD(int, int, int*, int*);
 
 //Part2
 void part2(int, int);
