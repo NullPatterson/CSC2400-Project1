@@ -135,8 +135,7 @@ void part3(int a, int b){
     vector<int> primesB;
 
     //GCD Calculation
-    int gcd;
-    gcd = middleSchoolGCD(a, b, primesA, primesB);
+    int gcd = middleSchoolGCD(a, b, primesA, primesB);
 
     //Outputting the GCD
     cout << "gcd(" << a << ", " << b << ") = " << gcd << endl;
@@ -186,8 +185,21 @@ int middleSchoolGCD(int a, int b, vector<int> &vectorA, vector<int> &vectorB){
     int gcd = 1;
 
     //Determining the prime factors of a and b and storing them in their respective vectors
-    primeFactorization(a, vectorA);
-    primeFactorization(b, vectorB);
+    //Accomodating for negative integers
+    if(a < 0){
+        vectorA.push_back(-1);
+        primeFactorization(-a, vectorA);
+    }
+    else{
+        primeFactorization(a, vectorA);
+    }
+    if(b < 0){
+        vectorB.push_back(-1);
+        primeFactorization(-b, vectorB);
+    }
+    else{
+        primeFactorization(b, vectorB);
+    }
 
     //Calcualting common prime factors of a and b
     commonFactors(vectorA, vectorB, commonVector);
