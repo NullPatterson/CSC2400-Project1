@@ -5,3 +5,4 @@ C++ Versions/vpTest.exe
 *.exe
 =======
 
+.vscode/settings.json
