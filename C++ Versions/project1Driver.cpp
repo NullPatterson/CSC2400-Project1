@@ -172,10 +172,15 @@ void part3(int a, int b){
     vector<int> primesB;
 
     //GCD Calculation
-    int gcd = middleSchoolGCD(a, b, primesA, primesB);
+    if((a == 0) || (b == 0)){
+        cout << "gcd(" << a << ", " << b << ") is undefined by the \"Middle School Algorith\"" << endl;
+    }
+    else{
+        int gcd = middleSchoolGCD(a, b, primesA, primesB);
 
-    //Outputting the GCD
-    cout << "gcd(" << a << ", " << b << ") = " << gcd << endl;
+        //Outputting the GCD
+        cout << "gcd(" << a << ", " << b << ") = " << gcd << endl;
+    }
 }
 
 /*
@@ -227,12 +232,18 @@ int middleSchoolGCD(int a, int b, vector<int> &vectorA, vector<int> &vectorB){
         vectorA.push_back(-1);
         primeFactorization(-a, vectorA);
     }
+    else if(a == 1){
+        vectorA.push_back(1);
+    }
     else{
         primeFactorization(a, vectorA);
     }
     if(b < 0){
         vectorB.push_back(-1);
         primeFactorization(-b, vectorB);
+    }
+    else if(b == 1){
+        vectorA.push_back(1);
     }
     else{
         primeFactorization(b, vectorB);
