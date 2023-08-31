@@ -42,22 +42,27 @@ void part1(int a, int b){
     //Calculating the gcd and passing x and y by reference
     int gcd;
     //gcd = euclidianGCD(a, b, &x, &y);
-    if((a < 0) && (b > 0)){
-        gcd = euclidianGCD(-a, b, &x, &y);
-    }
-    else if((a > 0) && (b < 0)){
-        gcd = euclidianGCD(a, -b, &x, &y);
+    if((a == 0) && (b == 0)){
+        cout << "gcd(0, 0) is undefined by Euclid's Algorithm" << endl;
     }
     else{
-        gcd = euclidianGCD(a, b, &x, &y);
+        if((a < 0) && (b > 0)){
+            gcd = euclidianGCD(-a, b, &x, &y);
+        }
+        else if((a > 0) && (b < 0)){
+            gcd = euclidianGCD(a, -b, &x, &y);
+        }
+        else{
+            gcd = euclidianGCD(a, b, &x, &y);
+        }
+
+
+        //Outputting the following 3 lines all on one line. Seperated here for readibility while editing
+        //Output should look like "gcd(a, b) = (a)(x) + (b)(y) = gcd"
+        cout << "gcd(" << a << ", " << b << ") = "; 
+        cout << "(" << a << ")(" << x << ") + (" << b << ")(" << y << ") = ";
+        cout << gcd << endl;
     }
-
-
-    //Outputting the following 3 lines all on one line. Seperated here for readibility while editing
-    //Output should look like "gcd(a, b) = (a)(x) + (b)(y) = gcd"
-    cout << "gcd(" << a << ", " << b << ") = "; 
-    cout << "(" << a << ")(" << x << ") + (" << b << ")(" << y << ") = ";
-    cout << gcd << endl;
 }
 
 /* 
@@ -71,6 +76,11 @@ int euclidianGCD(int a, int b, int *x, int *y){
         *x = 0;
         *y = 1;
         return b;
+    }
+    if(b == 0){
+        *x = 1;
+        *y = 0;
+        return a;
     }
 
     //Variables to store the calues from the recursive call.
@@ -98,25 +108,30 @@ void part2(int a, int b){
     
     //GCD Calculation
     int gcd;
-    if((a < 0) && (b < 0)){
-        gcd = consecutiveGCD(-a, -b, min(-a, -b));
-    }
-    else if(a < 0){
-        gcd = consecutiveGCD(-a, b, min(-a, b));
-    }
-    else if(b < 0){
-        gcd = consecutiveGCD(a, -b, min(a, -b));
+    if((a == 0) && (b == 0)){
+        cout << "gcd(0, 0) is undefined by the Consecutive Integer Checking Algorithm" << endl;
     }
     else{
-        gcd = consecutiveGCD(a, b, min(a, b));
-    }
+        if((a < 0) && (b < 0)){
+            gcd = consecutiveGCD(-a, -b, min(-a, -b));
+        }
+        else if(a < 0){
+            gcd = consecutiveGCD(-a, b, min(-a, b));
+        }
+        else if(b < 0){
+            gcd = consecutiveGCD(a, -b, min(a, -b));
+        }
+        else{
+            gcd = consecutiveGCD(a, b, min(a, b));
+        }
 
-    //Outputting GCD
-    if((a < 0) && (b < 0)){
-        cout << "gcd(" << a << ", " << b << ") = -" << gcd << endl;
-    }
-    else{
-        cout << "gcd(" << a << ", " << b << ") = " << gcd << endl;
+        //Outputting GCD
+        if((a < 0) && (b < 0)){
+            cout << "gcd(" << a << ", " << b << ") = -" << gcd << endl;
+        }
+        else{
+            cout << "gcd(" << a << ", " << b << ") = " << gcd << endl;
+        }
     }
 }
 
