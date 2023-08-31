@@ -112,7 +112,13 @@ void part2(int a, int b){
         cout << "gcd(0, 0) is undefined by the Consecutive Integer Checking Algorithm" << endl;
     }
     else{
-        if((a < 0) && (b < 0)){
+        if(a == 0){
+            gcd = b;
+        }
+        else if(b == 0){
+            gcd = a;
+        }
+        else if((a < 0) && (b < 0)){
             gcd = consecutiveGCD(-a, -b, min(-a, -b));
         }
         else if(a < 0){
